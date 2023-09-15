@@ -18,6 +18,8 @@ def get_all_persons(db:Session=Depends(get_db)):
     persons=db.query(models.Person).all()
     return {"persons":persons}
 
+
+
 @app.post('/api')
 def create_person(person:PersonCreate,db:Session=Depends(get_db)):
     new_person=models.Person(name=person.name)
@@ -49,7 +51,7 @@ def delete_person(pk:int,db:Session=Depends(get_db)):
     else:
         person.delete(synchronize_session=False)
         db.commit()
-        return {"deleted":"school removed"}
+        return {"deleted":"person removed"}
 
 
 @app.put('/api/{pk}')
